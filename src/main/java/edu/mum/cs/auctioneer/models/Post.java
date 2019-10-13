@@ -16,8 +16,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//@Entity
-//@Table(name = "POST")
+@Entity
+@Table(name = "POST")
 public class Post {
 
 	@Id
@@ -27,8 +27,8 @@ public class Post {
 
 	@Column(name = "TITLE")
 	private String title;
-	@Column(name = "DESC")
-	private String desc;
+	@Column(name = "DESCRIPTION")
+	private String description;
 	@Column(name = "EXPIRDATE")
 	private LocalDate expirDate;
 	@Column(name = "MINPRICE")
@@ -73,52 +73,12 @@ public class Post {
 		this.title = title;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-
-	public LocalDate getExpirationDate() {
-		return expirDate;
-	}
-
-	public void setExpirationDate(LocalDate expirationDate) {
-		this.expirDate = expirationDate;
-	}
-
-	public Integer getMinimumPrice() {
-		return minPrice;
-	}
-
-	public void setMinimumPrice(Integer minimumPrice) {
-		this.minPrice = minimumPrice;
-	}
-
-	public Integer getIncrementalValue() {
-		return incrValue;
-	}
-
-	public void setIncrementalValue(Integer incrementalValue) {
-		this.incrValue = incrementalValue;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Category getCategory() {
@@ -151,6 +111,46 @@ public class Post {
 
 	public void setPhotos(Set<Photo> photos) {
 		this.photos = photos;
+	}
+
+	public LocalDate getExpirDate() {
+		return expirDate;
+	}
+
+	public void setExpirDate(LocalDate expirDate) {
+		this.expirDate = expirDate;
+	}
+
+	public Integer getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Integer minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public Integer getIncrValue() {
+		return incrValue;
+	}
+
+	public void setIncrValue(Integer incrValue) {
+		this.incrValue = incrValue;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 }

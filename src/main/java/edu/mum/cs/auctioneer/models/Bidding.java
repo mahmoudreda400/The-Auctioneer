@@ -26,10 +26,10 @@ public class Bidding {
 	@Column(name = "PRICE")
 	private Double price;
 
-//	@ManyToOne
-//	@JoinColumn(name = "POST_ID")
-//	@JsonIgnoreProperties(value = { "biddings" })
-//	private Post post;
+	@ManyToOne
+	@JoinColumn(name = "POST_ID")
+	@JsonIgnoreProperties(value = { "biddings" })
+	private Post post;
 
 	@ManyToOne
 	@JoinColumn(name = "USER_ID")
@@ -61,13 +61,13 @@ public class Bidding {
 		this.price = price;
 	}
 
-//	public Post getPost() {
-//		return post;
-//	}
-//
-//	public void setPost(Post post) {
-//		this.post = post;
-//	}
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
 
 	public User getUser() {
 		return user;

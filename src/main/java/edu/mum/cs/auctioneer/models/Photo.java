@@ -19,9 +19,9 @@ public class Photo {
 	@Column(name = "URL")
 	private String url;
 
-//	@ManyToOne
-//	@JoinColumn(name = "POST_ID")
-//	private Post post;
+	@ManyToOne
+	@JoinColumn(name = "POST_ID")
+	private Post post;
 
 	public long getId() {
 		return id;
@@ -39,12 +39,12 @@ public class Photo {
 		this.url = url;
 	}
 
-//	public Post getPost() {
-//		return post;
-//	}
-//
-//	public void setPost(Post post) {
-//		this.post = post;
-//	}
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
 
 }

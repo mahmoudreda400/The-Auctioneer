@@ -11,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "REPORT")
+@Entity
+@Table(name = "REPORT")
 public class Report {
 
 	@Id
@@ -21,8 +21,8 @@ public class Report {
 	private long id;
 	@Column(name = "REPORT_DATE")
 	private LocalDate date;
-	@Column(name = "DESC")
-	private String desc;
+	@Column(name = "DESCRIPTION")
+	private String description;
 
 	@ManyToOne
 	@JoinColumn(name = "REPORTER_ID")
@@ -48,12 +48,12 @@ public class Report {
 		this.date = date;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public User getReporter() {
