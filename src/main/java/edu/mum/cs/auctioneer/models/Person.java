@@ -1,3 +1,4 @@
+
 package edu.mum.cs.auctioneer.models;
 
 import java.util.Collection;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,14 +24,16 @@ public class Person implements UserDetails {
 
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Column(name = "NAME")
 	private String name;
-	@Column(name = "EMAIL",nullable = false)
+
+	@Email
+	@Column(name = "EMAIL",nullable = false,unique = true)
 	private String email;
 	@Column(name = "PASSWORD",nullable = false)
 	private String password;
@@ -39,7 +44,8 @@ public class Person implements UserDetails {
 
 	@Column(name = "ROLE")
 	private PersonType role = PersonType.user;
-//
+
+	
 	public Person() {
 		// TODO Auto-generated constructor stub
 	}
