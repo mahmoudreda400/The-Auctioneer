@@ -11,8 +11,12 @@ import edu.mum.cs.auctioneer.repositories.PersonRepository;
 @Service
 public class PersonServiceImpl implements PersonService{
 
-	@Autowired
 	private PersonRepository personRepo;
+	
+	@Autowired
+	public PersonServiceImpl(PersonRepository personRepo) {
+		this.personRepo = personRepo;
+	}
 	
 	@Override
 	public Optional<Person> getPersonById(long id) {

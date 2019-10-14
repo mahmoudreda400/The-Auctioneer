@@ -8,5 +8,10 @@ import edu.mum.cs.auctioneer.services.UserService;
 @RestController
 public class UserController {
 
+	private UserService userService;
 
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 }

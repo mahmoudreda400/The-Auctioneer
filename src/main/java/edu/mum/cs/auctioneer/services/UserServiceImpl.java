@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import edu.mum.cs.auctioneer.repositories.UserRepository;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService{
 
 	private UserRepository userRepo;
 
