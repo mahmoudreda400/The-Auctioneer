@@ -1,8 +1,7 @@
-package edu.mum.cs.auctioneer.models.services;
+package edu.mum.cs.auctioneer.services;
 
 import org.springframework.stereotype.Service;
 
-@Service
 public interface UserService {
 
 }

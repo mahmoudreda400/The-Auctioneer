@@ -1,5 +1,6 @@
 package edu.mum.cs.auctioneer.models;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,8 +40,15 @@ public class User extends Person {
 	@JsonIgnoreProperties(value = { "reported" })
 	private Set<Report> hasReports;
 
-	public User() {
 
+	
+
+
+
+	public User(long id, String name, String email, String password, String phone, String address, Boolean blocked) {
+		super(id, name, email, password, phone, address);
+		this.blocked = blocked;
+	
 	}
 
 	public Boolean getBlocked() {
@@ -80,5 +90,7 @@ public class User extends Person {
 	public void setHasReports(Set<Report> hasReports) {
 		this.hasReports = hasReports;
 	}
+
+	
 
 }

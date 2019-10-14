@@ -1,9 +1,9 @@
-package edu.mum.cs.auctioneer.models.services;
+package edu.mum.cs.auctioneer.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.mum.cs.auctioneer.models.services.repositories.UserRepository;
+import edu.mum.cs.auctioneer.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl {

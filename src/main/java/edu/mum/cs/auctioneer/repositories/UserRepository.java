@@ -1,4 +1,4 @@
-package edu.mum.cs.auctioneer.models.services.repositories;
+package edu.mum.cs.auctioneer.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
