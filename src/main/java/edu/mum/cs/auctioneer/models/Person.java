@@ -40,9 +40,9 @@ public class Person implements UserDetails {
 	@Column(name = "ROLE")
 	private PersonType role = PersonType.user;
 //
-//	public Person() {
-//		// TODO Auto-generated constructor stub
-//	}
+	public Person() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Person(long id, String name, String email, String password, String phone, String address) {
 		super();

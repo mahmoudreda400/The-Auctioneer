@@ -9,4 +9,6 @@ import edu.mum.cs.auctioneer.models.Person;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
 	Optional<Person> findByEmail(String email);
+	
+	Optional<Person> findByEmailAndPassword(String email, String password);
 }

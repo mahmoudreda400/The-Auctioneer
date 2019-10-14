@@ -9,15 +9,15 @@ import edu.mum.cs.auctioneer.models.Person;
 import edu.mum.cs.auctioneer.repositories.PersonRepository;
 
 @Service
-public class PersonServiceImpl implements PersonService{
+public class PersonServiceImpl implements PersonService {
 
 	private PersonRepository personRepo;
-	
+
 	@Autowired
 	public PersonServiceImpl(PersonRepository personRepo) {
 		this.personRepo = personRepo;
 	}
-	
+
 	@Override
 	public Optional<Person> getPersonById(long id) {
 		return personRepo.findById(id);
@@ -26,6 +26,16 @@ public class PersonServiceImpl implements PersonService{
 	@Override
 	public Optional<Person> getPersonByEmail(String email) {
 		return personRepo.findByEmail(email);
+	}
+
+	@Override
+	public Optional<Person> getPersonByEmailAndPassword(String email, String password) {
+		return personRepo.findByEmailAndPassword(email, password);
+	}
+
+	@Override
+	public Person updatePersonData(Person person) {
+		return personRepo.save(person);
 	}
 
 }
