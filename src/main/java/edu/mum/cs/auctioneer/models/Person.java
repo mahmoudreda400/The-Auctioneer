@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "PERSON")
-public class Person implements UserDetails {
+public class Person extends AbstarctEntity implements UserDetails {
 
 
 	private static final long serialVersionUID = 1L;

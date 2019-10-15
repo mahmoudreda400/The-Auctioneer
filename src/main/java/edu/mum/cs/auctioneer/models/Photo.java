@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PHOTO")
-public class Photo {
+public class Photo extends AbstarctEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
