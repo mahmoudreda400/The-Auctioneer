@@ -3,6 +3,7 @@ package edu.mum.cs.auctioneer.models;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,7 +54,7 @@ public class Post {
 	@JsonIgnoreProperties(value = { "post" })
 	private Set<Bidding> biddings;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Photo.class, mappedBy = "post")
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Photo.class, mappedBy = "post", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties(value = { "post" })
 	private Set<Photo> photos;
 
