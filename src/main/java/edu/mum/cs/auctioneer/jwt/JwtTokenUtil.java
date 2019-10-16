@@ -22,6 +22,7 @@ public class JwtTokenUtil implements Serializable {
 	private static final long serialVersionUID = -3301605591108950415L;
 
 	static final String CLAIM_KEY_USERNAME = "sub";
+	static final String CLAIM_KEY_TYPE = "type";
 	static final String CLAIM_KEY_AUDIENCE = "aud";
 	static final String CLAIM_KEY_CREATED = "iat";
 
@@ -40,7 +41,18 @@ public class JwtTokenUtil implements Serializable {
 	private Long expiration;
 
 	public String getEmailFromToken(String token) {
-		return getClaimFromToken(token, Claims::getSubject);
+		String email = getClaimFromToken(token, Claims::getSubject);
+		Claims claims = Jwts.parser().setSigningKey(secret)
+                .parseClaimsJws(token).getBody();
+//		System.out.println(">>> claims role: "+claims.get("role"));
+//		System.out.println(">>> claims name: "+claims.get("name"));
+		
+		return email;
+	}
+	
+	public Claims getJWTClaims(String token) {
+		return  Jwts.parser().setSigningKey(secret)
+                .parseClaimsJws(token).getBody();
 	}
 
 	public Date getIssuedAtDateFromToken(String token) {
@@ -80,13 +92,15 @@ public class JwtTokenUtil implements Serializable {
 
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
+		Person p = (Person) userDetails;
+		claims.put("role", p.getRole());
+		claims.put("name", p.getName());
 		return doGenerateToken(claims, userDetails.getUsername());
 	}
 
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 		final Date createdDate = timeProvider.now();
 		final Date expirationDate = calculateExpirationDate(createdDate);
-
 		System.out.println("doGenerateToken " + createdDate);
 
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(createdDate)
