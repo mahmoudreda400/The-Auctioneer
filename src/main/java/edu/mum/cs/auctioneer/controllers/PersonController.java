@@ -23,9 +23,15 @@ import edu.mum.cs.auctioneer.jwt.JwtTokenUtil;
 import edu.mum.cs.auctioneer.models.Person;
 import edu.mum.cs.auctioneer.services.JwtUserDetailsServiceImpl;
 import edu.mum.cs.auctioneer.services.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class PersonController {
@@ -119,4 +125,27 @@ public class PersonController {
 		return response;
 	}
 
-}
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public Map<String, String> register(@RequestBody @Valid Person person) {
+        Map<String, String> response = new HashMap<String, String>();
+        try {
+            Optional<Person> personOptional = personService.registerNewUserAccount(person);
+
+            if (!personOptional.isEmpty()) {
+
+
+                response.put("message", "success");
+                response.put("type", person.getRole().toString());
+            } else {
+                response.put("message", "There is an account with that email adress");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.put("message", e.getLocalizedMessage());
+        }
+        return response;
+    }
+
+    }
+
+

@@ -1,9 +1,9 @@
 package edu.mum.cs.auctioneer.services;
 
-import java.util.Optional;
-
 import edu.mum.cs.auctioneer.models.Person;
 import edu.mum.cs.auctioneer.models.User;
+
+import java.util.Optional;
 
 public interface PersonService {
 
