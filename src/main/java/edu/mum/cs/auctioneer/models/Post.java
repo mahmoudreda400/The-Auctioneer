@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "POST")
-public class Post {
+public class Post extends AbstarctEntity {
 
 	@Id
 	@Column(name = "ID")

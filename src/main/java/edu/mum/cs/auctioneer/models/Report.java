@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "REPORT")
-public class Report {
+public class Report extends AbstarctEntity {
 
 	@Id
 	@Column(name = "ID")
