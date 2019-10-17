@@ -52,7 +52,7 @@ public class Person extends AbstarctEntity implements UserDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(long id, String name, String email, String password, String phone, String address) {
+	public Person(long id, String name, String email, String password, String phone, String address, PersonType role) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -60,6 +60,7 @@ public class Person extends AbstarctEntity implements UserDetails {
 		this.password = password;
 		this.phone = phone;
 		this.address = address;
+		this.role = role;
 	}
 
 	public long getId() {

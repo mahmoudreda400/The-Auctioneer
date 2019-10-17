@@ -45,8 +45,8 @@ public class User extends Person {
 
 	public User() {}
 
-	public User(long id, String name, String email, String password, String phone, String address, Boolean blocked) {
-		super(id, name, email, password, phone, address);
+	public User(long id, String name, String email, String password, String phone, String address, Boolean blocked, PersonType role) {
+		super(id, name, email, password, phone, address, role);
 		this.blocked = blocked;
 	
 	}
