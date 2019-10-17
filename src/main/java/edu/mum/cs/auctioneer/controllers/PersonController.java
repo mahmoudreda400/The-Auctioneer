@@ -125,26 +125,26 @@ public class PersonController {
 		return response;
 	}
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public Map<String, String> register(@RequestBody @Valid Person person) {
-        Map<String, String> response = new HashMap<String, String>();
-        try {
-            Optional<Person> personOptional = personService.registerNewUserAccount(person);
-
-            if (!personOptional.isEmpty()) {
-
-
-                response.put("message", "success");
-                response.put("type", person.getRole().toString());
-            } else {
-                response.put("message", "There is an account with that email adress");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.put("message", e.getLocalizedMessage());
-        }
-        return response;
-    }
+//    @RequestMapping(value = "/register", method = RequestMethod.POST)
+//    public Map<String, String> register(@RequestBody @Valid Person person) {
+//        Map<String, String> response = new HashMap<String, String>();
+//        try {
+//            Optional<Person> personOptional = personService.registerNewUserAccount(person);
+//
+//            if (!personOptional.isEmpty()) {
+//
+//
+//                response.put("message", "success");
+//                response.put("type", person.getRole().toString());
+//            } else {
+//                response.put("message", "There is an account with that email adress");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            response.put("message", e.getLocalizedMessage());
+//        }
+//        return response;
+//    }
 
     }
 
