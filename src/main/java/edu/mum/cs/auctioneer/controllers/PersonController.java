@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import edu.mum.cs.auctioneer.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,10 @@ public class PersonController {
 
 			if (!personOptional.isEmpty()) {
 				Person person = personOptional.get();
+
+				//put looged in user into session
+				UserSession.setLoggedInPerson(person);
+
 				UserDetails userDetails = userDetailsService.loadUserByUsername(person.getEmail());
 				String token = jwtTokenUtil.generateToken(userDetails);
 
