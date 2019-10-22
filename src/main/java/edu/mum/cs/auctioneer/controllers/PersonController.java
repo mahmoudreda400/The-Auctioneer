@@ -99,25 +99,4 @@ public class PersonController {
 	}
 
 
-
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<String> register(@RequestBody @Valid Person person) {
-		System.out.println(" >>> resgidter");
-		ResponseEntity<String> response = null;
-		try {
-			Optional<Person> personOptional = personService.registerNewUserAccount(person);
-
-			if (!personOptional.isEmpty()) {
-				response = new ResponseEntity<String>("success", HttpStatus.OK);
-			} else {
-				response = new ResponseEntity<String>("There is an account with that email adress",
-						HttpStatus.FORBIDDEN);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response = new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
-		}
-		return response;
-	}
-
 }

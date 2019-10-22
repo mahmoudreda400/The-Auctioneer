@@ -50,6 +50,15 @@ public class JwtTokenUtil implements Serializable {
 		return email;
 	}
 	
+	public String getIdFromToken(String token) {
+		Claims claims = Jwts.parser().setSigningKey(secret)
+                .parseClaimsJws(token).getBody();
+		return claims.get("id").toString();
+//		System.out.println(">>> claims role: "+claims.get("role"));
+//		System.out.println(">>> claims name: "+claims.get("name"));
+	
+	}
+	
 	public Claims getJWTClaims(String token) {
 		return  Jwts.parser().setSigningKey(secret)
                 .parseClaimsJws(token).getBody();
@@ -95,6 +104,7 @@ public class JwtTokenUtil implements Serializable {
 		Person p = (Person) userDetails;
 		claims.put("role", p.getRole());
 		claims.put("name", p.getName());
+		claims.put("id", p.getId());
 		return doGenerateToken(claims, userDetails.getUsername());
 	}
 
