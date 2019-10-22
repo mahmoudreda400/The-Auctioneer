@@ -89,10 +89,28 @@ public class PostController {
 		return response;
 	}
 
+    @GetMapping("/Allposts")
+    public ResponseEntity<Object> getAllPost() {
+        ResponseEntity<Object> response = null;
+        try {
+
+
+                List<Post>userPost = postService.getAllPost();
+                response = new ResponseEntity<Object>(userPost, HttpStatus.OK);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response = new ResponseEntity<Object>(e.getMessage(), HttpStatus.OK);
+        }
+        return response;
+    }
+
 //@GetMapping("/posts/{id}")
 //    public Post getPostById(@PathVariable Long id){
 //    return postService.getPostById(id).get();
 //}
+
 	@PostMapping(value = "/posts/{id}")
 	public ResponseEntity<Object> getPostById(@PathVariable Long id) {
 		ResponseEntity<Object> response = null;
