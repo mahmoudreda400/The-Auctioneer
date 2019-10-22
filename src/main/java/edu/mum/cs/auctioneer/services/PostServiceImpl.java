@@ -27,7 +27,12 @@ public class PostServiceImpl implements PostService {
 	@Value("${prefix.imagesDir}")
 	private String imagesDir;
 
-	@Override
+    @Override
+    public List<Post> getAllPost() {
+        return postRepository.findAll();
+    }
+
+    @Override
 	public List<Post> getAllPostByLogin(User user) {
 		return postRepository.findAllByUser(user);
 	}
