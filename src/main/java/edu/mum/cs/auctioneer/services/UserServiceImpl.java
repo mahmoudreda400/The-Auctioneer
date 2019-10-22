@@ -9,7 +9,13 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import edu.mum.cs.auctioneer.models.PersonType;
+import edu.mum.cs.auctioneer.models.Post;
+import edu.mum.cs.auctioneer.models.Report;
+import edu.mum.cs.auctioneer.models.User;
+import edu.mum.cs.auctioneer.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +37,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResponseEntity bidOnPost(Post post) {
-		User user = new User(); // TODO load the user from session
 
-		return getBiddingService().bid(post, user);
+		if (null != UserSession.getLoggedInPerson() && PersonType.user.equals(UserSession.getLoggedInPerson().getRole())){
+			User user = userRepo.findByEmail(UserSession.getLoggedInPerson().getEmail());
+			return getBiddingService().bid(post, user);
+		}
+		return new ResponseEntity("please login before you can bid!", HttpStatus.FORBIDDEN);
 	}
 
 	@Override

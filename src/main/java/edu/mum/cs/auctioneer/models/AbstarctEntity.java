@@ -4,38 +4,38 @@ package edu.mum.cs.auctioneer.models;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class AbstarctEntity {
 
-    private LocalDate created;
+    private LocalDateTime created;
 
-    private LocalDate Modified;
+    private LocalDateTime Modified;
 
-    public LocalDate getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDate created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public LocalDate getModified() {
+    public LocalDateTime getModified() {
         return Modified;
     }
 
-    public void setModified(LocalDate modified) {
+    public void setModified(LocalDateTime modified) {
         Modified = modified;
     }
 
     @PrePersist
     public void onPrePersist() {
-        setCreated(LocalDate.now());
+        setCreated(LocalDateTime.now());
     }
 
     @PreUpdate
     public void onPreUpdate() {
-        setModified(LocalDate.now());
+        setModified(LocalDateTime.now());
     }
 }

@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import edu.mum.cs.auctioneer.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,10 @@ import edu.mum.cs.auctioneer.jwt.JwtTokenUtil;
 import edu.mum.cs.auctioneer.models.Person;
 import edu.mum.cs.auctioneer.services.JwtUserDetailsServiceImpl;
 import edu.mum.cs.auctioneer.services.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.validation.Valid;
 
@@ -46,6 +52,10 @@ public class PersonController {
 
 			if (!personOptional.isEmpty()) {
 				Person person = personOptional.get();
+
+				//put looged in user into session
+				UserSession.setLoggedInPerson(person);
+
 				UserDetails userDetails = userDetailsService.loadUserByUsername(person.getEmail());
 				String token = jwtTokenUtil.generateToken(userDetails);
 
