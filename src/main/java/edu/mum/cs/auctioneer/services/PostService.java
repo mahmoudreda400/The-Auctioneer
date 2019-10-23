@@ -18,5 +18,8 @@ public interface PostService {
     Optional<Post> getPostById(long id);
 	Optional<Post> updatePostByUser(User user, Post post, MultipartFile[] files);
 	List<Post> getAllExpiredPosts();
+    List<?> getPostsPerMonth();
+    List<?> getPostsPerCategory();
+    List<?> getPostsPerUser();
 
 }

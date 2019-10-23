@@ -14,6 +14,8 @@ import edu.mum.cs.auctioneer.services.UserService;
 import javax.validation.Valid;
 
 import java.util.List;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +30,31 @@ public class UserController {
 		this.userService = userService;
 		this.biddingService = biddingService;
 	}
+
+	@RequestMapping(value = "/reports", method = RequestMethod.GET)
+	public List<User> fetchReports() {
+		return userService.getAllUsers();
+	}
+
+	@RequestMapping(value = "/blocked", method = RequestMethod.GET)
+	public List<User> blockedUsers() {
+		return userService.getBlockedUsers();
+	}
+
+	@RequestMapping(value = "/activate", method = RequestMethod.POST)
+	public Boolean activate(Long userId) {
+		return userService.activate(userId);
+	}
+
+	@RequestMapping(value = "/ignoreReports", method = RequestMethod.POST)
+	public Boolean ignoreReports(Long userId) {
+		return userService.ignoreReports(userId);
+	}
+
+    @RequestMapping(value = "/blockUser", method = RequestMethod.POST)
+    public Boolean blockUser(Long userId) {
+        return userService.blockUser(userId);
+    }
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody @Valid User person) {
@@ -54,4 +81,18 @@ public class UserController {
 		return biddingService.getUserNotificatios(118);
 	}
 	
+	@PostMapping("/reportUser")
+	public ResponseEntity reportUser(@RequestParam("msg") String msg, @RequestPart("reported") User user/*, @RequestHeader("Authorization") String token*/){
+		return getUserService().reportUser(msg,user);
+	}
+
+	//-----------------setters and getters-------------------
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 }

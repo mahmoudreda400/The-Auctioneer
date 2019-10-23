@@ -103,5 +103,20 @@ public class PostServiceImpl implements PostService {
 			this.template.convertAndSend("/norifications/" + post.getUser().getId(), post);
 		}
 		return posts;
+
+	}
+	@Override
+	public List<?> getPostsPerMonth() {
+		return postRepository.getPostsPerMonth();
+	}
+
+	@Override
+	public List<?> getPostsPerCategory() {
+		return postRepository.getPostsPerCategory();
+	}
+
+	@Override
+	public List<?> getPostsPerUser() {
+		return postRepository.getPostsPerUser();
 	}
 }

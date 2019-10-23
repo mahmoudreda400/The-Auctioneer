@@ -5,11 +5,7 @@ import edu.mum.cs.auctioneer.models.Post;
 import edu.mum.cs.auctioneer.services.BiddingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -26,6 +22,13 @@ public class BiddingController {
     @PostMapping("/max-bidding")
     public ResponseEntity<Bidding> getMaxBiddingOnPost(@RequestBody Post post){
         return getBiddingService().getMaxBiddingOnPost(post);
+    }
+
+    @PostMapping("/bid")
+    public ResponseEntity<Bidding> bidOnPost(@RequestBody Post post, @RequestHeader("Authorization") String token){
+        //TODO check token validation
+    	System.out.println(">> bid on post: "+post.getTitle());
+        return getBiddingService().bid(post);
     }
 
     //---------------------setters and getters-----------------

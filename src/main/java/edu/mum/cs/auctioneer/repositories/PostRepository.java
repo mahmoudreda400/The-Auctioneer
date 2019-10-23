@@ -18,4 +18,13 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p WHERE p.expirDate <= :expirDate")
     List<Post> getAllExpired(@Param("expirDate") LocalDate expirDate);
 
+    //where month(CURRENT_DATE)-month(p.created) < 6
+    @Query("select month(p.created), count(p.id) from Post as p  group by month(p.created)")
+    List<?> getPostsPerMonth();
+
+    @Query("select p.category.name, count(p.id) from Post as p  group by p.category.name")
+    List<?> getPostsPerCategory();
+
+    @Query("select p.user.name, count(p.id) from Post as p  group by p.user order by count(p.id) desc ")
+    List<?> getPostsPerUser();
 }

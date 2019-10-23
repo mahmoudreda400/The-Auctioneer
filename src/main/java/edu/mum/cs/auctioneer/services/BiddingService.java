@@ -10,6 +10,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface BiddingService {
     ResponseEntity<Bidding> getMaxBiddingOnPost(Post post);
-    ResponseEntity<Bidding> bid(Post post, User user);
 	List<Bidding> getUserNotificatios(long userId);
+    ResponseEntity<Bidding> bid(Post post);
 }

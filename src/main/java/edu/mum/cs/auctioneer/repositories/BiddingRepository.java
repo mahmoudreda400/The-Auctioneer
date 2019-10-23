@@ -20,5 +20,5 @@ public interface BiddingRepository extends JpaRepository<Bidding, Long> {
 //	List<Post> getNotifications(@Param("userId") long userId, @Param("todayDate") LocalDate todayDate);
 	
 
-	List<Bidding> findTopByExpirDateLessThanEqualOrderBypriceDesc(LocalDate todatDate);
+	List<Bidding> findPostExpirDateLessThanEqualOrderByPrice(LocalDate todatDate);
 }
