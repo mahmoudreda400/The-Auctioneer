@@ -1,12 +1,12 @@
 package edu.mum.cs.auctioneer.services;
 
-import java.util.Optional;
-
+import edu.mum.cs.auctioneer.models.Person;
+import edu.mum.cs.auctioneer.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.mum.cs.auctioneer.models.Person;
-import edu.mum.cs.auctioneer.repositories.PersonRepository;
+import javax.transaction.Transactional;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -14,12 +14,12 @@ import javax.transaction.Transactional;
 public class PersonServiceImpl implements PersonService{
 
 	private PersonRepository personRepo;
-	
+
 	@Autowired
 	public PersonServiceImpl(PersonRepository personRepo) {
 		this.personRepo = personRepo;
 	}
-	
+
 	@Override
 	public Optional<Person> getPersonById(long id) {
 		return personRepo.findById(id);

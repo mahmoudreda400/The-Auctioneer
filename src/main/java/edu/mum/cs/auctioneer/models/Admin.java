@@ -13,6 +13,8 @@ import org.springframework.security.core.GrantedAuthority;
 @PrimaryKeyJoinColumn(name = "ID")
 public class Admin extends Person {
 
+	public Admin(){}
+
 	public Admin(long id, String name, String email, String password, String phone, String address, PersonType role) {
 		super(id, name, email, password, phone, address, role);
 

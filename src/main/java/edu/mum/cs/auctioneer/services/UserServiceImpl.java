@@ -1,10 +1,20 @@
 package edu.mum.cs.auctioneer.services;
 
+import edu.mum.cs.auctioneer.models.Person;
 import edu.mum.cs.auctioneer.models.Post;
 import edu.mum.cs.auctioneer.models.Report;
 import edu.mum.cs.auctioneer.models.User;
 import edu.mum.cs.auctioneer.repositories.ReportRepository;
+
+import java.util.Optional;
+
+import edu.mum.cs.auctioneer.models.PersonType;
+import edu.mum.cs.auctioneer.models.Post;
+import edu.mum.cs.auctioneer.models.Report;
+import edu.mum.cs.auctioneer.models.User;
+import edu.mum.cs.auctioneer.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -33,9 +43,12 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public ResponseEntity bidOnPost(Post post) {
-		User user = new User(); //TODO load the user from session
 
-		return getBiddingService().bid(post, user);
+		if (null != UserSession.getLoggedInPerson() && PersonType.user.equals(UserSession.getLoggedInPerson().getRole())){
+			User user = userRepo.findByEmail(UserSession.getLoggedInPerson().getEmail());
+			return getBiddingService().bid(post, user);
+		}
+		return new ResponseEntity("please login before you can bid!", HttpStatus.FORBIDDEN);
 	}
 
 	@Override
@@ -91,7 +104,6 @@ public class UserServiceImpl implements UserService{
 		this.reportService = reportService;
 	}
 
-
     public ReportRepository getReportRepository() {
         return reportRepository;
     }
@@ -99,4 +111,30 @@ public class UserServiceImpl implements UserService{
     public void setReportRepository(ReportRepository reportRepository) {
         this.reportRepository = reportRepository;
     }
+	@Override
+	public User getUserByEmail(String email) {
+		return userRepo.findByEmail(email);
+	}
+
+	@Override
+	public User getUserById(long id) {
+		return userRepo.findById(id).get();
+	}
+
+	@Transactional
+	@Override
+	public Optional<User> registerNewUserAccount(User user) {
+		Optional<User> person1 = Optional.empty();
+		try {
+			person1 = Optional.of(userRepo.save(user));
+		} catch (Exception e) {
+			e.getStackTrace();
+		}
+		return person1;
+	}
+
+	@Override
+	public User updateUserData(User user) {
+		return userRepo.save(user);
+	}
 }
