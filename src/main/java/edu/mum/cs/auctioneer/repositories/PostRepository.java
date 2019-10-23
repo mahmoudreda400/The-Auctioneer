@@ -19,6 +19,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("select p.category.name, count(p.id) from Post as p  group by p.category.name")
     List<?> getPostsPerCategory();
 
-    @Query("select p.user, count(p.id) from Post as p  group by p.user order by count(p.id) desc ")
+    @Query("select p.user.name, count(p.id) from Post as p  group by p.user order by count(p.id) desc ")
     List<?> getPostsPerUser();
 }

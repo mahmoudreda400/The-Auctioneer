@@ -13,7 +13,7 @@ public interface UserService {
 
 //    ResponseEntity bidOnPost(Post post);
 
-    ResponseEntity reportUser(Report report);
+//    ResponseEntity reportUser(Report report);
 
     List<User> getAllUsers();
 
