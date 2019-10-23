@@ -21,4 +21,5 @@ public interface UserService {
 	User getUserById(long id);
 
 	Optional<User> registerNewUserAccount(User user);
+	User updateUserData(User user);
 }

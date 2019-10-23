@@ -96,4 +96,9 @@ public class UserServiceImpl implements UserService {
 		}
 		return person1;
 	}
+
+	@Override
+	public User updateUserData(User user) {
+		return userRepo.save(user);
+	}
 }
