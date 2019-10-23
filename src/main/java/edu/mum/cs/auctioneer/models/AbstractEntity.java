@@ -7,7 +7,7 @@ import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public abstract class AbstarctEntity {
+public abstract class AbstractEntity {
 
     private LocalDateTime created;
 

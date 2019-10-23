@@ -16,14 +16,10 @@ import javax.validation.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import java.util.Collection;
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "PERSON")
-public class Person extends AbstarctEntity implements UserDetails {
+public class Person extends AbstractEntity implements UserDetails {
 
 
 	private static final long serialVersionUID = 1L;
