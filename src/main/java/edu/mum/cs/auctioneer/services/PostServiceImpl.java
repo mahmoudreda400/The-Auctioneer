@@ -27,12 +27,12 @@ public class PostServiceImpl implements PostService {
 	@Value("${prefix.imagesDir}")
 	private String imagesDir;
 
-    @Override
-    public List<Post> getAllPost() {
-        return postRepository.findAll();
-    }
+	@Override
+	public List<Post> getAllPost() {
+		return postRepository.findAll();
+	}
 
-    @Override
+	@Override
 	public List<Post> getAllPostByLogin(User user) {
 		return postRepository.findAllByUser(user);
 	}
@@ -46,45 +46,23 @@ public class PostServiceImpl implements PostService {
 //			photo.setUrl(photoURLs[i]);
 //			postPhotos.add(photo);
 //		}
-		Set<Photo> postPhotos = savePhotos(user.getId(), post, files);
+		Set<Photo> postPhotos = photoService.savePhotos(user.getId(), post, files);
 		post.setPhotos(postPhotos);
 		post.setUser(user);
 		return Optional.of(postRepository.save(post));
 
 	}
 
-	private Set<Photo> savePhotos(long userId,Post post, MultipartFile[] files) {
-
-		Set<Photo> photos = new HashSet<>();
-
-		File dirFile = new File(imagesDir);
-		if (!dirFile.exists()) {
-			dirFile.mkdirs();
+	@Override
+	public Optional<Post> updatePostByUser(User user, Post post, MultipartFile[] files) {
+		Set<Photo> postPhotos = photoService.savePhotos(user.getId(), post, files);
+		if (postPhotos.size() > 0) {
+			photoService.deletePostPhotos(post.getId());
+			post.setPhotos(postPhotos);
 		}
-		String curPathDir = imagesDir + "/" + userId + "-" + new Date().getTime() ;
-		dirFile = new File(curPathDir);
-		if (!dirFile.exists()) {
-			dirFile.mkdirs();
-		}
+		post.setUser(user);
+		return Optional.of(postRepository.save(post));
 
-		for (MultipartFile mfile : files) {
-			System.out.println(mfile.getOriginalFilename());
-			String curPath = curPathDir+ "/" + mfile.getOriginalFilename();
-			System.out.println("curPath " + curPath);
-			File file = new File(curPath);
-			try {
-				mfile.transferTo(file);
-				Photo photo = new Photo();
-				photo.setUrl(curPath);
-				photo.setPost(post);
-				photos.add(photo);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-		return photos;
 	}
 
 	@Override

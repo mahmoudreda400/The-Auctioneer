@@ -16,5 +16,6 @@ public interface PostService {
     boolean deletePostByUserAndId(User user,Post post);
     Optional<Post>UpdatePostByUser(User user,Post post);
     Optional<Post> getPostById(long id);
+	Optional<Post> updatePostByUser(User user, Post post, MultipartFile[] files);
 
 }
