@@ -62,6 +62,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public List<User> getBlockedUsers() {
+		return getUserRepo().findAllByBlockedTrue();
+	}
+
+	@Override
 	public Boolean ignoreReports(Long id) {
         User user = getUserRepo().findById(id).get();
 		 getReportRepository().deleteByReported(user);
@@ -77,8 +82,16 @@ public class UserServiceImpl implements UserService{
         return true;
     }
 
+	@Override
+	public Boolean activate(Long id) {
+		User user = getUserRepo().findById(id).get();
+		user.setBlocked(false);
+		getUserRepo().save(user);
+		return true;
+	}
 
-    //----------------setters and getters-------------------
+
+	//----------------setters and getters-------------------
 
 	public UserRepository getUserRepo() {
 		return userRepo;
