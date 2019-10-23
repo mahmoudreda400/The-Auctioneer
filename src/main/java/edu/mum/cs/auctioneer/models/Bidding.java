@@ -34,7 +34,7 @@ public class Bidding extends AbstarctEntity{
 
 	@ManyToOne
 	@JoinColumn(name = "USER_ID")
-	@JsonIgnoreProperties(value = { "biddings" })
+	@JsonIgnoreProperties(value = { "biddings","posts", "makeReports","hasReports" })
 	private User user;
 
 	

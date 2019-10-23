@@ -77,7 +77,7 @@ public class BiddingServiceImpl implements BiddingService {
 
 	@Override
 	public List<Bidding> getUserNotificatios(long userId){
-		return biddingRepository.findPostExpirDateLessThanEqualOrderByPrice(LocalDate.now());
+		return biddingRepository.getNotifications(userId,LocalDate.now());
 	}
 
     public PostService getPostService() {

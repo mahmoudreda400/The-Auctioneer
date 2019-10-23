@@ -47,7 +47,7 @@ public class Post extends AbstarctEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "USER_ID")
-	@JsonIgnoreProperties(value = { "posts" })
+	@JsonIgnoreProperties(value = { "biddings","posts", "makeReports","hasReports" })
 	private User user;
 
 	@OneToMany(fetch = FetchType.LAZY, targetEntity = Bidding.class, mappedBy = "post")
