@@ -5,6 +5,7 @@ import edu.mum.cs.auctioneer.models.Post;
 import edu.mum.cs.auctioneer.models.Report;
 import edu.mum.cs.auctioneer.models.User;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -101,4 +102,6 @@ public class UserServiceImpl implements UserService {
 	public User updateUserData(User user) {
 		return userRepo.save(user);
 	}
+	
+
 }

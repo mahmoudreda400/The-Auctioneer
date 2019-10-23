@@ -6,10 +6,12 @@ import edu.mum.cs.auctioneer.models.User;
 import edu.mum.cs.auctioneer.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +28,10 @@ public class PostServiceImpl implements PostService {
 
 	@Value("${prefix.imagesDir}")
 	private String imagesDir;
+	
+	@Autowired
+	private SimpMessagingTemplate template;
+
 
 	@Override
 	public List<Post> getAllPost() {
@@ -87,5 +93,15 @@ public class PostServiceImpl implements PostService {
 	public Optional<Post> getPostById(long id) {
 
 		return postRepository.getPostById(id);
+	}
+	
+	@Override
+	public List<Post> getAllExpiredPosts(){
+		LocalDate today = LocalDate.now();
+		List<Post> posts =  postRepository.getAllExpired(today);
+		for (Post post : posts) {
+			this.template.convertAndSend("/norifications/" + post.getUser().getId(), post);
+		}
+		return posts;
 	}
 }

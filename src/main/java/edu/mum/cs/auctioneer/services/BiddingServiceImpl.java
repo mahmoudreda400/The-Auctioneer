@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 @Service
 public class BiddingServiceImpl implements BiddingService {
@@ -36,7 +38,7 @@ public class BiddingServiceImpl implements BiddingService {
         Bidding bidding = new Bidding();
         bidding.setPost(post);
         bidding.setUser(user);
-        bidding.setDate(LocalDate.now());
+        bidding.setDate(LocalTime.now());
         bidding.setPrice(newPrice);
 
         Bidding responseBody = getBiddingRepository().save(bidding);
@@ -53,4 +55,9 @@ public class BiddingServiceImpl implements BiddingService {
     public void setBiddingRepository(BiddingRepository biddingRepository) {
         this.biddingRepository = biddingRepository;
     }
+    
+	@Override
+	public List<Bidding> getUserNotificatios(long userId){
+		return biddingRepository.findTopByExpirDateLessThanEqualOrderBypriceDesc( LocalDate.now());
+	}
 }

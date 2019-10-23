@@ -17,5 +17,6 @@ public interface PostService {
     Optional<Post>UpdatePostByUser(User user,Post post);
     Optional<Post> getPostById(long id);
 	Optional<Post> updatePostByUser(User user, Post post, MultipartFile[] files);
+	List<Post> getAllExpiredPosts();
 
 }

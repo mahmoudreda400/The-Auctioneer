@@ -1,6 +1,7 @@
 package edu.mum.cs.auctioneer.models;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class Bidding extends AbstarctEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Column(name = "BID_DATE")
-	private LocalDate date;
+	private LocalTime date;
 	@Column(name = "PRICE")
 	private Double price;
 
@@ -45,11 +46,11 @@ public class Bidding extends AbstarctEntity{
 		this.id = id;
 	}
 
-	public LocalDate getDate() {
+	public LocalTime getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(LocalTime date) {
 		this.date = date;
 	}
 
