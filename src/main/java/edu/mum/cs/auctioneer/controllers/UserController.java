@@ -30,6 +30,16 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 
+	@RequestMapping(value = "/blocked", method = RequestMethod.GET)
+	public List<User> blockedUsers() {
+		return userService.getBlockedUsers();
+	}
+
+	@RequestMapping(value = "/activate", method = RequestMethod.POST)
+	public Boolean activate(Long userId) {
+		return userService.activate(userId);
+	}
+
 	@RequestMapping(value = "/ignoreReports", method = RequestMethod.POST)
 	public Boolean ignoreReports(Long userId) {
 		return userService.ignoreReports(userId);

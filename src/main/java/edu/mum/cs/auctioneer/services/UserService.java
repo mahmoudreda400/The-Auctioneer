@@ -17,8 +17,13 @@ public interface UserService {
 
     List<User> getAllUsers();
 
+    List<User> getBlockedUsers();
+
     Boolean ignoreReports(Long id);
+
     Boolean blockUser(Long id);
+
+    Boolean activate(Long id);
 
     User getUserByEmail(String email);
 
