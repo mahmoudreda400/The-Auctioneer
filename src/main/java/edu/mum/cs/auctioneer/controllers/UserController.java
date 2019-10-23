@@ -1,5 +1,6 @@
 package edu.mum.cs.auctioneer.controllers;
 
+import edu.mum.cs.auctioneer.jwt.JwtTokenUtil;
 import edu.mum.cs.auctioneer.models.Bidding;
 import edu.mum.cs.auctioneer.models.Person;
 import edu.mum.cs.auctioneer.models.User;
@@ -24,11 +25,13 @@ public class UserController {
 
 	private UserService userService;
 	private BiddingService biddingService;
+	private JwtTokenUtil jwtTokenUtil;
 
 	@Autowired
-	public UserController(UserService userService, BiddingService biddingService) {
+	public UserController(UserService userService, BiddingService biddingService,JwtTokenUtil jwtTokenUtil) {
 		this.userService = userService;
 		this.biddingService = biddingService;
+		this.jwtTokenUtil = jwtTokenUtil;
 	}
 
 	@RequestMapping(value = "/reports", method = RequestMethod.GET)
@@ -77,9 +80,21 @@ public class UserController {
 	}
 	
 	@GetMapping(value="/getNotifications")
-	public List<Bidding> getNotifications(){
-		
-		return biddingService.getUserNotificatios(118);
+	public ResponseEntity getNotifications(@RequestHeader("Authorization") String token){
+		ResponseEntity<Object> response = null;
+		try {
+			String email = jwtTokenUtil.getEmailFromToken(token);
+			User user = userService.getUserByEmail(email);
+			if(user != null) {
+				List<Bidding> bids =  biddingService.getUserNotificatios(user.getId());
+				response = new ResponseEntity<Object>(bids, HttpStatus.OK);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			response = new ResponseEntity<Object>(e.getMessage(), HttpStatus.FORBIDDEN);
+		}
+		return response;
 	}
 	
 	@PostMapping("/reportUser")

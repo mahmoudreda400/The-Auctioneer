@@ -1,7 +1,5 @@
 package edu.mum.cs.auctioneer.models;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "REPORT")
-public class Report extends AbstarctEntity {
+public class Report extends AbstractEntity {
 
 	@Id
 	@Column(name = "ID")

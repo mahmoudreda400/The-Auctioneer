@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CATEGORY")
-public class Category extends AbstarctEntity {
+public class Category extends AbstractEntity {
 
 	@Id
 	@Column(name = "ID")

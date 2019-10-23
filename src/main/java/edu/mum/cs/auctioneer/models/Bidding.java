@@ -1,8 +1,5 @@
 package edu.mum.cs.auctioneer.models;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,14 +13,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "BIDDING")
-public class Bidding extends AbstarctEntity{
+public class Bidding extends AbstractEntity {
 
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "BID_DATE")
-	private LocalTime date;
+//	@Column(name = "BID_DATE")
+//	private LocalTime date;
 	@Column(name = "PRICE")
 	private Double price;
 
@@ -46,13 +43,13 @@ public class Bidding extends AbstarctEntity{
 		this.id = id;
 	}
 
-	public LocalTime getDate() {
-		return date;
-	}
-
-	public void setDate(LocalTime date) {
-		this.date = date;
-	}
+//	public LocalTime getDate() {
+//		return date;
+//	}
+//
+//	public void setDate(LocalTime date) {
+//		this.date = date;
+//	}
 
 	public Double getPrice() {
 		return price;
