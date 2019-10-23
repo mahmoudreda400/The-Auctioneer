@@ -33,9 +33,9 @@ public class Post extends AbstractEntity {
 	@Column(name = "EXPIRDATE")
 	private LocalDate expirDate;
 	@Column(name = "MINPRICE")
-	private Integer minPrice;
+	private Double minPrice;
 	@Column(name = "INCRVALUE")
-	private Integer incrValue;
+	private Double incrValue;
 	@Column(name = "CITY")
 	private String city;
 	@Column(name = "COUNTRY")
@@ -61,7 +61,7 @@ public class Post extends AbstractEntity {
 	public Post() {
 	}
 
-	public Post(long id, String title, String description, LocalDate expirDate, Integer minPrice, Integer incrValue,
+	public Post(long id, String title, String description, LocalDate expirDate, Double minPrice, Double incrValue,
 			String city, String country) {
 		this.id = id;
 		this.title = title;
@@ -137,19 +137,19 @@ public class Post extends AbstractEntity {
 		this.expirDate = expirDate;
 	}
 
-	public Integer getMinPrice() {
+	public Double getMinPrice() {
 		return minPrice;
 	}
 
-	public void setMinPrice(Integer minPrice) {
+	public void setMinPrice(Double minPrice) {
 		this.minPrice = minPrice;
 	}
 
-	public Integer getIncrValue() {
+	public Double getIncrValue() {
 		return incrValue;
 	}
 
-	public void setIncrValue(Integer incrValue) {
+	public void setIncrValue(Double incrValue) {
 		this.incrValue = incrValue;
 	}
 

@@ -56,10 +56,12 @@ public class BiddingServiceImpl implements BiddingService {
         Bidding bidding = new Bidding();
         bidding.setPost(targetPost.get());
         bidding.setUser(user);
-//        bidding.setDate(LocalTime.now());
         bidding.setPrice(newPrice);
 
         Bidding responseBody = getBiddingRepository().save(bidding);
+
+        targetPost.get().setMinPrice(newPrice);
+        getPostService().updatePost(targetPost.get());
 
         return new ResponseEntity<>(responseBody, HttpStatus.OK);
 
