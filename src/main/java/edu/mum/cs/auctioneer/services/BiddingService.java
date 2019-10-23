@@ -7,5 +7,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface BiddingService {
     ResponseEntity<Bidding> getMaxBiddingOnPost(Post post);
-    ResponseEntity<Bidding> bid(Post post, User user);
+    ResponseEntity<Bidding> bid(Post post);
 }

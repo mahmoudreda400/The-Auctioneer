@@ -15,5 +15,8 @@ public interface PostService {
     boolean deletePostByUserAndId(User user,Post post);
     Optional<Post>UpdatePostByUser(User user,Post post);
     Optional<Post> getPostById(long id);
+    List<?> getPostsPerMonth();
+    List<?> getPostsPerCategory();
+    List<?> getPostsPerUser();
 
 }

@@ -19,8 +19,7 @@ public class Report extends AbstarctEntity {
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(name = "REPORT_DATE")
-	private LocalDate date;
+
 	@Column(name = "DESCRIPTION")
 	private String description;
 
@@ -32,20 +31,21 @@ public class Report extends AbstarctEntity {
 	@JoinColumn(name = "REPORTED_ID")
 	private User reported;
 
+	public Report() {
+	}
+
+	public Report(String msg, User reporter, User reported) {
+		this.description = msg;
+		this.reporter = reporter;
+		this.reported = reported;
+	}
+
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
 	}
 
 	public String getDescription() {

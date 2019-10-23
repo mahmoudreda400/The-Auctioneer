@@ -27,6 +27,18 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	
-	
+	@PostMapping("/reportUser")
+	public ResponseEntity reportUser(@RequestParam("msg") String msg, @RequestPart("reported") User user/*, @RequestHeader("Authorization") String token*/){
+		return getUserService().reportUser(msg,user);
+	}
+
+	//-----------------setters and getters-------------------
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 }

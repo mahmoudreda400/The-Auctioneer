@@ -64,4 +64,19 @@ public class PostServiceImpl implements PostService {
 
 		return postRepository.getPostById(id);
 	}
+
+	@Override
+	public List<?> getPostsPerMonth() {
+		return postRepository.getPostsPerMonth();
+	}
+
+	@Override
+	public List<?> getPostsPerCategory() {
+		return postRepository.getPostsPerCategory();
+	}
+
+	@Override
+	public List<?> getPostsPerUser() {
+		return postRepository.getPostsPerUser();
+	}
 }
