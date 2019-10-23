@@ -111,11 +111,11 @@ public class PostController {
 //    return postService.getPostById(id).get();
 //}
 
-	@PostMapping(value = "/posts/{id}")
+	@GetMapping(value = "/posts/{id}")
 	public ResponseEntity<Object> getPostById(@PathVariable Long id) {
 		ResponseEntity<Object> response = null;
 		try {
-
+			System.out.println(">> id>> "+id);
 			Post post = postService.getPostById(id).get();
 			if (post != null) {
 				response = new ResponseEntity<Object>(post, HttpStatus.OK);
@@ -158,27 +158,6 @@ public class PostController {
 //        }
 //        return savedpost;
 //    }
-	@PostMapping("/updatePost")
-	public ResponseEntity<Object> update(@RequestBody Post post, @RequestHeader("Authorization") String token) {
-		ResponseEntity<Object> response = null;
-		try {
-			String email = jwtTokenUtil.getEmailFromToken(token);
-			User user = (User) personService.getPersonByEmail(email).get();
-			if (user != null) {
-				Post savedpost = postService.UpdatePostByUser(user, post).get();
-				response = new ResponseEntity<Object>(savedpost, HttpStatus.OK);
-			} else {
-				response = new ResponseEntity<Object>("you can't update this post ", HttpStatus.FORBIDDEN);
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			response = new ResponseEntity<Object>(e.getMessage(), HttpStatus.OK);
-		}
-		return response;
-	}
-
 //    @PostMapping("/addPost")
 //    public Post add(@RequestBody Post post, @RequestHeader("Authorization") String token, @RequestBody MultipartFile[]files){
 //        Post savedpost= null;
@@ -207,6 +186,35 @@ public class PostController {
 			User user = userService.getUserByEmail(email);
 			if (user != null) {
 				Post savedpost = postService.addPostByUser(user, post, files).get();
+				response = new ResponseEntity<Object>("success", HttpStatus.OK);
+
+			} else {
+				response = new ResponseEntity<Object>("you aren't authorized ", HttpStatus.FORBIDDEN);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	@PostMapping("/updatePost")
+	public ResponseEntity updatePost(@RequestHeader("Authorization") String token, @RequestPart("post") Post post,
+			@RequestParam("images") MultipartFile[] files) {
+
+		System.out.println(">>>> update post <<<<");
+		System.out.println(" post -> category: " + post.getCategory());
+		System.out.println("  file:  " + files);
+		System.out.println("  token : " + token);
+		ResponseEntity<Object> response = null;
+		try {
+			String email = jwtTokenUtil.getEmailFromToken(token);
+			User user = userService.getUserByEmail(email);
+			if (user != null) {
+					Post savedpost = postService.updatePostByUser(user, post, files).get();
+						
+				
 				response = new ResponseEntity<Object>("success", HttpStatus.OK);
 
 			} else {
