@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import edu.mum.cs.auctioneer.models.User;
+import edu.mum.cs.auctioneer.services.UserService;
 import edu.mum.cs.auctioneer.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +45,8 @@ public class PersonController {
 
 	@Autowired
 	private PersonService personService;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Map<String, String> login(@RequestParam("email") String email, @RequestParam("password") String password) {
@@ -89,13 +93,13 @@ public class PersonController {
 
 	@PostMapping(value = "/updateProfile")
 	public ResponseEntity<Object> getProfileData(@RequestHeader("Authorization") String token,
-			@RequestBody Person personTpUpdate) {
+												 @RequestBody User personTpUpdate) {
 		ResponseEntity<Object> response = null;
 		try {
 			String email = jwtTokenUtil.getEmailFromToken(token);
 			Person person = personService.getPersonByEmail(email).get();
 			if (person != null) {
-				person = personService.updatePersonData(personTpUpdate);
+				person = userService.updateUserData(personTpUpdate);
 				response = new ResponseEntity<Object>(person, HttpStatus.OK);
 			} else {
 				response = new ResponseEntity<Object>("please login first", HttpStatus.FORBIDDEN);
@@ -107,27 +111,4 @@ public class PersonController {
 		}
 		return response;
 	}
-
-
-
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<String> register(@RequestBody @Valid Person person) {
-		System.out.println(" >>> resgidter");
-		ResponseEntity<String> response = null;
-		try {
-			Optional<Person> personOptional = personService.registerNewUserAccount(person);
-
-			if (!personOptional.isEmpty()) {
-				response = new ResponseEntity<String>("success", HttpStatus.OK);
-			} else {
-				response = new ResponseEntity<String>("There is an account with that email adress",
-						HttpStatus.FORBIDDEN);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response = new ResponseEntity<String>(e.getMessage(), HttpStatus.FORBIDDEN);
-		}
-		return response;
-	}
-
 }

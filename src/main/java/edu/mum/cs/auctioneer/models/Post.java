@@ -57,7 +57,17 @@ public class Post extends AbstarctEntity {
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Photo.class, mappedBy = "post", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties(value = { "post" })
 	private Set<Photo> photos;
-
+public Post(){}
+public Post(long id,String title,String description,LocalDate expirDate,Integer minPrice,Integer incrValue,String city,String country){
+this.id=id;
+	this.title=title;
+	this.description=description;
+	this.expirDate=expirDate;
+	this.minPrice=minPrice;
+	this.incrValue=incrValue;
+	this.city=city;
+	this.country=country;
+}
 	public long getId() {
 		return id;
 	}

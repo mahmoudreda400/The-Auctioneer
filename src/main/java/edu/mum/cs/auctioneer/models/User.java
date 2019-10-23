@@ -32,12 +32,12 @@ public class User extends Person {
 
 //	 reports which he did it to other users
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reporter", targetEntity = Report.class)
-	@JsonIgnoreProperties(value = { "reporter" })
+	@JsonIgnoreProperties(value = { "reporter","reported" })
 	private Set<Report> makeReports;
 
 	// reports which other users did it to him
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "reported", targetEntity = Report.class)
-	@JsonIgnoreProperties(value = { "reported" })
+	@JsonIgnoreProperties(value = { "reported","reporter" })
 	private Set<Report> hasReports;
 
 
