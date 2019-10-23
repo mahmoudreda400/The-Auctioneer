@@ -78,6 +78,7 @@ public class UserController {
 	
 	@GetMapping(value="/getNotifications")
 	public List<Bidding> getNotifications(){
+		
 		return biddingService.getUserNotificatios(118);
 	}
 	

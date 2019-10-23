@@ -13,8 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class BiddingServiceImpl implements BiddingService {
@@ -77,7 +80,16 @@ public class BiddingServiceImpl implements BiddingService {
 
 	@Override
 	public List<Bidding> getUserNotificatios(long userId){
-		return biddingRepository.getNotifications(userId,LocalDate.now());
+		List<Post> posts = biddingRepository.getPostsThatReadyToNotify(userId, LocalDate.now());
+		List<Bidding> bids = posts.stream().flatMap(p -> p.getBiddings().stream())
+				.max(Comparator.comparing(Bidding::getPrice)).stream()
+				.filter(b -> b.getUser().getId() == userId )
+				.collect(Collectors.toList());
+		System.out.println("--> posts : "+posts.size());
+		System.out.println("--> bids: "+bids.size());
+//		List<Bidding> res = biddingRepository.getNotifications(userId,LocalDate.now());
+//		System.out.println("--> res: "+res.size());
+		return bids;
 	}
 
     public PostService getPostService() {
