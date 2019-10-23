@@ -60,15 +60,17 @@ public class BiddingServiceImpl implements BiddingService {
 		Bidding lastBidding = (Bidding) getMaxBiddingOnPost(targetPost.get()).getBody();
 		Double newPrice = lastBidding.getPrice() + targetPost.get().getIncrValue();
 
-		Bidding bidding = new Bidding();
-		bidding.setPost(targetPost.get());
-		bidding.setUser(user);
-//        bidding.setDate(LocalTime.now());
-		bidding.setPrice(newPrice);
+        Bidding bidding = new Bidding();
+        bidding.setPost(targetPost.get());
+        bidding.setUser(user);
+        bidding.setPrice(newPrice);
 
 		Bidding responseBody = getBiddingRepository().save(bidding);
 
-		return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        targetPost.get().setMinPrice(newPrice);
+        getPostService().updatePost(targetPost.get());
+
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
 
 	}
 

@@ -39,7 +39,7 @@ public class PostServiceImplTest {
     @Test
     public void getAllPost() {
         List<Post> list=new ArrayList<Post>();
-        Post post=new Post(1,"Tititle","This is a post", LocalDate.now(),10,1,"DesMoines","USA");
+        Post post=new Post(1,"Tititle","This is a post", LocalDate.now(),10.0,1.0,"DesMoines","USA");
         list.add(post);
         when(postRepository.findAll()).thenReturn(list);
         List<Post>actualList=postService.getAllPost();
@@ -52,7 +52,7 @@ public class PostServiceImplTest {
         User user=new User(3,"A","maiada399@live.com","A","01157673788","string",false, PersonType.user);
         //int userID=3;
         List<Post> list=new ArrayList<Post>();
-        Post post=new Post(1,"Tititle","This is a post", LocalDate.now(),10,1,"DesMoines","USA");
+        Post post=new Post(1,"Tititle","This is a post", LocalDate.now(),10.0,1.0,"DesMoines","USA");
         list.add(post);
         when(postRepository.findAllByUser(user)).thenReturn(list);
         List<Post>actualList=postService.getAllPostByLogin(user);

@@ -119,4 +119,11 @@ public class PostServiceImpl implements PostService {
 	public List<?> getPostsPerUser() {
 		return postRepository.getPostsPerUser();
 	}
+
+	@Override
+	public Post updatePost(Post post) {
+		return postRepository.save(post);
+	}
+
+
 }

@@ -21,5 +21,6 @@ public interface PostService {
     List<?> getPostsPerMonth();
     List<?> getPostsPerCategory();
     List<?> getPostsPerUser();
+    Post updatePost(Post post);
 
 }
