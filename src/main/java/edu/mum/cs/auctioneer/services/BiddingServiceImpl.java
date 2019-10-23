@@ -99,11 +99,6 @@ public class BiddingServiceImpl implements BiddingService {
 			}
 		}
 
-		System.out.println("--> posts : " + posts.size());
-//		System.out.println("--> bids: "+bids.size());
-		System.out.println("--> response: " + response.size());
-//		List<Bidding> res = biddingRepository.getNotifications(userId,LocalDate.now());
-//		System.out.println("--> res: "+res.size());
 		return new ArrayList<Bidding>(response);
 	}
 
