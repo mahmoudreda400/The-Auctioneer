@@ -50,7 +50,7 @@ public class Post extends AbstractEntity {
 	@JsonIgnoreProperties(value = { "biddings","posts", "makeReports","hasReports" })
 	private User user;
 
-	@OneToMany(fetch = FetchType.LAZY, targetEntity = Bidding.class, mappedBy = "post")
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Bidding.class, mappedBy = "post")
 	@JsonIgnoreProperties(value = { "post" })
 	private Set<Bidding> biddings;
 

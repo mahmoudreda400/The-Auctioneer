@@ -15,23 +15,27 @@ public interface UserService {
 
 //    ResponseEntity reportUser(Report report);
 
-    List<User> getAllUsers();
+	List<User> getAllUsers();
 
-    List<User> getBlockedUsers();
+	List<User> getBlockedUsers();
 
-    Boolean ignoreReports(Long id);
+	Boolean ignoreReports(Long id);
 
-    Boolean blockUser(Long id);
+	Boolean blockUser(Long id);
 
-    Boolean activate(Long id);
+	Boolean activate(Long id);
 
-    User getUserByEmail(String email);
+	User getUserByEmail(String email);
 
 	User getUserById(long id);
 
 	Optional<User> registerNewUserAccount(User user);
-	User updateUserData(User user);
-    ResponseEntity reportUser(String msg, User reported);
 
-    User findByEmail(String email);
+	User updateUserData(User user);
+
+	ResponseEntity reportUser(String msg, User reported);
+
+	User findByEmail(String email);
+
+	List<User> getAllUsersHasBiddings();
 }

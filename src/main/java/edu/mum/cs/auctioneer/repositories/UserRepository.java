@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
     List<User> findAllByBlocked(Boolean blocked);
 
     List<User> findAllByBlockedTrue();
+    
+    @Query("SELECT u FROM User u INNER JOIN u.biddings b")
+	List<User> getAllUserHasBidding();
 }

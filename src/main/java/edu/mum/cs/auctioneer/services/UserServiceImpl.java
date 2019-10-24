@@ -65,6 +65,12 @@ public class UserServiceImpl implements UserService{
 	public List<User> getAllUsers() {
 		return getUserRepo().findAll();
 	}
+	
+	@Override
+	public List<User> getAllUsersHasBiddings() {
+		return getUserRepo().getAllUserHasBidding();
+	}
+
 
 	@Override
 	public List<User> getBlockedUsers() {

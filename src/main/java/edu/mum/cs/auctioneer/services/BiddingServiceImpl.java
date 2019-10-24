@@ -88,26 +88,50 @@ public class BiddingServiceImpl implements BiddingService {
 		this.biddingRepository = biddingRepository;
 	}
 
+//	@Override
+//	public List<Bidding> getUserNotificatios(long userId) {
+//		List<Post> posts = biddingRepository.getPostsThatReadyToNotify(userId, LocalDate.now());
+//		List<Set<Bidding>> bidsSet = posts.stream().map(p -> p.getBiddings())
+////				.filter(a -> a.stream().max(Comparator.comparing(Bidding::getPrice) != null))
+////				.max(Comparator.comparing(Bidding::getPrice)).stream()
+////				.filter(b -> b.getUser().getId() == userId )
+//				.collect(Collectors.toList());
+//		Set<Bidding> response = new HashSet();
+//		for (int i = 0; i < bidsSet.size(); i++) {
+//			Bidding b = bidsSet.get(i).stream().max(Comparator.comparing(Bidding::getPrice)).stream()
+//					.collect(Collectors.toList()).get(0);
+//		
+//			if (b!= null && b.getUser().getId() == userId) {
+//				response.add(b);
+//			}
+//		}
+//
+//		return new ArrayList<Bidding>(response);
+//	}
+	
 	@Override
 	public List<Bidding> getUserNotificatios(long userId) {
+		
+		List<Bidding> response = new ArrayList<Bidding>();
 		List<Post> posts = biddingRepository.getPostsThatReadyToNotify(userId, LocalDate.now());
-		List<Set<Bidding>> bidsSet = posts.stream().map(p -> p.getBiddings())
-//				.filter(a -> a.stream().max(Comparator.comparing(Bidding::getPrice) != null))
-//				.max(Comparator.comparing(Bidding::getPrice)).stream()
-//				.filter(b -> b.getUser().getId() == userId )
-				.collect(Collectors.toList());
-		Set<Bidding> response = new HashSet();
-		for (int i = 0; i < bidsSet.size(); i++) {
-			Bidding b = bidsSet.get(i).stream().max(Comparator.comparing(Bidding::getPrice)).stream()
-					.collect(Collectors.toList()).get(0);
-			if (b.getUser().getId() == userId) {
+		
+		for (Post post : posts) {
+			Double max =0.0;
+			Bidding b = null;
+			for (Bidding bidding: post.getBiddings()){
+				if(bidding.getPrice() > max && bidding.getUser().getId() == userId) {
+					b = bidding;
+					max = bidding.getPrice();
+				}
+			}
+			if(b != null) {
 				response.add(b);
 			}
 		}
+		
 
 		return new ArrayList<Bidding>(response);
 	}
-
 	public PostService getPostService() {
 		return postService;
 	}

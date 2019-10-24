@@ -49,8 +49,8 @@ public class PersonController {
 	private UserService userService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public Map<String, String> login(@RequestParam("email") String email, @RequestParam("password") String password) {
-		Map<String, String> response = new HashMap<String, String>();
+	public Map<String, Object> login(@RequestParam("email") String email, @RequestParam("password") String password) {
+		Map<String, Object> response = new HashMap<String, Object>();
 		try {
 			Optional<Person> personOptional = personService.getPersonByEmailAndPassword(email, password);
 
@@ -67,6 +67,7 @@ public class PersonController {
 				response.put("name", personOptional.get().getName());
 				response.put("token", token);
 				response.put("type", person.getRole().toString());
+				response.put("id", person.getId());
 			} else {
 				response.put("message", "user name or password is incorrect");
 			}
